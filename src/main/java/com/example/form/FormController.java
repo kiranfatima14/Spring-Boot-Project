@@ -27,27 +27,28 @@ public class FormController {
 
     }
 
-    @RequestMapping ("/GetDetails")
+    /*@RequestMapping ("/GetDetails")
     public String GetDetails(){
 
         return "view";
 
+    }*/
+    
+    @GetMapping("/getCustomers")
+    public ModelAndView GetDetails(){
+        ModelAndView mv = new ModelAndView("Retrieve");
+        Iterable<Customers> customers = repo.findAll();
+        mv.addObject("Customers", customers);
+        return mv;
     }
 
     @PostMapping("/GetDetails")
-
     public  ModelAndView GetDetails(@RequestParam  int id)
     {
-
-
         ModelAndView mv = new ModelAndView("Retrieve");
         Customers customers = repo.findById(id).orElse(null);
         mv.addObject(customers);
         return mv;
-
-
-
-
     }
 
 
